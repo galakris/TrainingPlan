@@ -1,4 +1,4 @@
-package com.example.trainingplan.domain;
+package com.example.trainingplan.model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,10 +15,18 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<TrainingPlan> trainingPlans;
 
     public User() {
+    }
+
+    public User(String login, String password, String firstName, String lastName, String email) {
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
     public Long getId() {

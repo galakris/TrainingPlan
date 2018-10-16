@@ -1,4 +1,4 @@
-package com.example.trainingplan.domain;
+package com.example.trainingplan.model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,19 +11,38 @@ public class Exercise {
     private Long id;
     @Column( nullable=false, length = 32)
     private String name;
+    //  push|pull
     @Column( nullable=false, length = 32)
     private String type;
+
+    // lowerbody|upperbody|core
     @Column( nullable=false, length = 32)
     private String muscleGroup;
+
+    // chest, back, biceps,
     @Column( nullable=false, length = 32)
     private String muscle;
+
+    // main|accessory
     @Column( nullable=false, length = 32)
     private String category;
+
+    // how to do
     private String descryption;
-    @OneToMany(mappedBy = "exercise")
+
+    @OneToMany(mappedBy = "exercise",fetch = FetchType.EAGER)
     private List<ExerciseTraining> exerciseTrainings;
 
     public Exercise() {
+    }
+
+    public Exercise(String name, String type, String muscleGroup, String muscle, String category, String descryption) {
+        this.name = name;
+        this.type = type;
+        this.muscleGroup = muscleGroup;
+        this.muscle = muscle;
+        this.category = category;
+        this.descryption = descryption;
     }
 
     public Long getId() {

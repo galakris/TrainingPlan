@@ -1,7 +1,6 @@
-package com.example.trainingplan.domain;
+package com.example.trainingplan.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,9 +9,10 @@ public class TrainingPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    // FBW/Split
     private String type;
     private String name;
-    @OneToMany(mappedBy = "trainingPlan")
+    @OneToMany(mappedBy = "trainingPlan",fetch = FetchType.EAGER)
     private List <TrainingDay> trainingDay;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -20,6 +20,12 @@ public class TrainingPlan {
 
 
     public TrainingPlan() {
+    }
+
+    public TrainingPlan(String type, String name, User user) {
+        this.type = type;
+        this.name = name;
+        this.user = user;
     }
 
     public Long getId() {

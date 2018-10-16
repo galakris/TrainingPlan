@@ -1,4 +1,4 @@
-package com.example.trainingplan.domain;
+package com.example.trainingplan.model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,16 +9,20 @@ public class TrainingDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type;
     private String name;
     @ManyToOne
     @JoinColumn(name = "training_plan_id")
     private TrainingPlan trainingPlan;
-    @OneToMany(mappedBy = "trainingDay")
+    @OneToMany(mappedBy = "trainingDay", fetch = FetchType.EAGER)
     private List<ExerciseTraining> exerciseTraining;
 
 
     public TrainingDay() {
+    }
+
+    public TrainingDay(String name, TrainingPlan trainingPlan) {
+        this.name = name;
+        this.trainingPlan = trainingPlan;
     }
 
     public Long getId() {
@@ -27,14 +31,6 @@ public class TrainingDay {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getName() {

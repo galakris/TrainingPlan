@@ -1,4 +1,4 @@
-package com.example.trainingplan.domain;
+package com.example.trainingplan.model;
 
 import javax.persistence.*;
 
@@ -8,10 +8,15 @@ public class ExerciseTraining {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int reps;
-    private int sets;
-    private int rest;
+    // Numer ciwczenie w dniu treningowym np. 3
     private int number;
+    // liczba serii
+    private int sets;
+    // liczba powtorzen
+    private int reps;
+    // dlugosc przerwy miedzy seriami (s)
+    private int rest;
+
     @ManyToOne
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
@@ -20,6 +25,15 @@ public class ExerciseTraining {
     private TrainingDay trainingDay;
 
     public ExerciseTraining() {
+    }
+
+    public ExerciseTraining(int number, int sets, int reps, int rest, Exercise exercise, TrainingDay trainingDay) {
+        this.number = number;
+        this.sets = sets;
+        this.reps = reps;
+        this.rest = rest;
+        this.exercise = exercise;
+        this.trainingDay = trainingDay;
     }
 
     public Long getId() {
