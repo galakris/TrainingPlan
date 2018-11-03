@@ -1,8 +1,8 @@
 package com.example.trainingplan.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,13 +11,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    @Column(unique = true)
     private String login;
-    @NotNull
+    @NotEmpty
     private String password;    // chyba zamiast string char powinien byc
-    @Column(name="firstname", nullable=false)
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
-    @NotNull
+    @NotEmpty
+    @Email
+    @Column(unique = true)
     private String email;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<TrainingPlan> trainingPlans;

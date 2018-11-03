@@ -4,6 +4,7 @@ import com.example.trainingplan.model.*;
 import com.example.trainingplan.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class Starter implements CommandLineRunner {
     @Autowired
     ExerciseTrainingRepository exerciseTrainingRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -44,8 +48,8 @@ public class Starter implements CommandLineRunner {
         ).forEach(exerciseRepository::save);
         // dodanie uzytkownikow
         Stream.of(
-                new User("galakris", "galakris", "Krzysztof" , "Gałuszka", "galakris@wp.pl" ),
-                new User("andrzejek", "12345", "Andrzej" , "Wronek", "wronek@wp.pl" )
+                new User("galakris", passwordEncoder.encode("galakris"), "Krzysztof" , "Gałuszka", "galakris@wp.pl" ),
+                new User("andrzejek", passwordEncoder.encode("12345"), "Andrzej" , "Wronek", "wronek@wp.pl" )
         ).forEach(userRepository::save);
 
         //dodanie planow treningowych

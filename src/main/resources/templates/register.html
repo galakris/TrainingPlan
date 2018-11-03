@@ -20,20 +20,23 @@
 
                 <div class="form-group">
                     <input th:field="*{firstName}" placeholder="Imię" class="form-control"/>
+                    <p th:errors="*{firstName}" class="text-danger"></p>
                 </div>
                 <div class="form-group">
                     <input th:field="*{lastName}" placeholder="Nazwisko" class="form-control"/>
+                    <p th:errors="*{lastName}" class="text-danger"></p>
                 </div>
                 <div class="form-group">
-                    <input th:field="*{email}" type="email" placeholder="Email" class="form-control"/>
-                    <p th:errors="*{email}" class="text-danger"></p>
+                    <input th:field="*{email}" placeholder="Email" class="form-control"/>
+                    <p th:errors="*{email}" class="text-danger" ></p>
                 </div>
                 <div class="form-group">
                     <input th:field="*{login}"  placeholder="Nazwa użytkownika" class="form-control"/>
-                    <p th:errors="*{password}">Password errors</p>
+                    <p th:errors="*{login}" class="text-danger"></p>
                 </div>
                 <div class="form-group">
                     <input th:field="*{password}" type="password" placeholder="Hasło" class="form-control"/>
+                    <p th:errors="*{password}" class="text-danger"></p>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Register" class="btn btn-primary btn-block"/>
