@@ -20,10 +20,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/register").permitAll()
-                .anyRequest().authenticated()
+                    //.antMatchers("/").permitAll()
+                    .antMatchers("/register").permitAll()
+                    .antMatchers("/logout").permitAll()
+                    .antMatchers("/webjars/**").permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                    .loginPage("/login")
+                        .permitAll()
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                        .logoutSuccessUrl("/");
+
     }
 }

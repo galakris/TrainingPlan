@@ -36,8 +36,13 @@ public class UserController {
         return "register";
     }
 
+    @GetMapping("login")
+    public String login(){
+        return "login";
+    }
+
     @PostMapping("/register")
-    public String addUser(@ModelAttribute @Valid User user, BindingResult bindingResult){
+    public String addUser(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
             return "register";
@@ -45,7 +50,9 @@ public class UserController {
         else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userService.add(user);
-            return "registerSuccess";
+
+            model.addAttribute("register", "Rejestracja powiodła się");
+            return "login";
         }
     }
 

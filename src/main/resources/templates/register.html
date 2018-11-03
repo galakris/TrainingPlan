@@ -1,21 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
-    <title>Registration form</title>
+
+    <title>Rejerstracja</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" >
+
+
 </head>
 <body>
-<h1>Registration form</h1>
+    <div class="container">
 
-<form action="#" method="post" th:action="@{/register}" th:object="${user}">
-    <input th:field="*{firstName}" placeholder="First Name" /><br />
-    <input th:field="*{lastName}" placeholder="Last Name" /><br />
-    <p th:errors="*{email}">Email errors</p>
-    <input th:field="*{email}" type="email" placeholder="Email" /><br />
-    <input th:field="*{login}"  placeholder="Login" /><br />
-    <p th:errors="*{password}">Password errors</p>
-    <input th:field="*{password}" type="password" placeholder="Password" /><br />
-    <input type="submit" value="Register" />
-</form>
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <form action="#" method="post" th:action="@{/register}" th:object="${user}" class="form-horizontal" >
+
+                <h2 class="">Rejestracja</h2>
+
+                <div class="form-group">
+                    <input th:field="*{firstName}" placeholder="Imię" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input th:field="*{lastName}" placeholder="Nazwisko" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input th:field="*{email}" type="email" placeholder="Email" class="form-control"/>
+                    <p th:errors="*{email}" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <input th:field="*{login}"  placeholder="Nazwa użytkownika" class="form-control"/>
+                    <p th:errors="*{password}">Password errors</p>
+                </div>
+                <div class="form-group">
+                    <input th:field="*{password}" type="password" placeholder="Hasło" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn btn-primary btn-block"/>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.css}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.css}"></script>
 </body>
 </html>

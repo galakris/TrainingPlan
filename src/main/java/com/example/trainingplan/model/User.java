@@ -2,6 +2,7 @@ package com.example.trainingplan.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,12 +12,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
-    @NotEmpty
+    @NotNull
     private String password;    // chyba zamiast string char powinien byc
     @Column(name="firstname", nullable=false)
     private String firstName;
     private String lastName;
-    @NotEmpty
+    @NotNull
     private String email;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<TrainingPlan> trainingPlans;
