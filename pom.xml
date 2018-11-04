@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>3.3.1-1</version>
+            <version>3.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>popper.js</artifactId>
-            <version>1.14.4</version>
+            <version>1.12.9</version>
         </dependency>
 
     </dependencies>

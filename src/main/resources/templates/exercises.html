@@ -2,48 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Ćwiczenia</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
 
-    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.css}"></script>
-    <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.css}"></script>
-
-    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    PLANY TRENINGWE
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">STWÓRZ PLAN</a>
-                    <a class="dropdown-item" href="#">MOJE PLANY</a>
-                </div>
-            </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
-            <input type="submit" value="WYLOGUJ" class="btn btn-link navbar-btn navbar-link"/>
-        </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PLANY TRENINGWE
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">STWÓRZ PLAN</a>
+                        <a class="dropdown-item" href="#">MOJE PLANY</a>
+                    </div>
+                </li>
+            </ul>
 
-    </div>
-</nav>
+            <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+                <input type="submit" value="WYLOGUJ" class="btn btn-link navbar-btn navbar-link"/>
+            </form>
+
+        </div>
+    </nav>
 
 
 
-<div class="container">
+    <div class="container">
         <div class="table-responsive" th:if="not ${exercises.isEmpty()}">
             <table class="table table-striped">
                 <tr>
@@ -60,5 +58,10 @@
             <h1>Brak ćwiczeń</h1>
         </div>
     </div>
+
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
 </body>
 </html>
