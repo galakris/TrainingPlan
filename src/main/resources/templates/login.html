@@ -18,7 +18,7 @@
         <br /><br />
 
 
-            <form th:action="@{/login}" method="post" class="form-signin offset-3 col-sm-6">
+            <form th:action="@{/login}" method="post" class="form-signin offset-sm-3 col-sm-6">
                 <h2 class="form-heading">Logowanie</h2><br />
 
                 <div th:if="${param.error}" class="text-danger">
@@ -32,8 +32,8 @@
                 <input type="submit" value="Zaloguj" class="btn btn-primary btn-block" /><br />
 
             </form>
-            <form th:action="@{/register}" method="get" class="offset-3 col-sm-6">
-                <button class="btn btn-warning btn-block" type="Submit">Rejestracja</button>
+            <form th:action="@{/register}" method="get" class="offset-sm-3 col-sm-6">
+                <button class="btn btn-danger btn-block" type="Submit">Rejestracja</button>
             </form>
         </div>
 

@@ -11,31 +11,33 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="container">
+            <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        PLANY TRENINGWE
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">STWÓRZ PLAN</a>
-                        <a class="dropdown-item" href="#">MOJE PLANY</a>
-                    </div>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            PLANY TRENINGWE
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">STWÓRZ PLAN</a>
+                            <a class="dropdown-item" href="#">MOJE PLANY</a>
+                        </div>
+                    </li>
+                </ul>
 
-            <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
-                <input type="submit" value="WYLOGUJ" class="btn btn-link navbar-btn navbar-link"/>
-            </form>
+                <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+                    <input type="submit" value="WYLOGUJ" class="btn btn-link navbar-btn navbar-link"/>
+                </form>
 
+            </div>
         </div>
     </nav>
 
