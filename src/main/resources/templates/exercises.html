@@ -4,40 +4,46 @@
     <title>Ćwiczenia</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
 
-    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.css}"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.css}"></script>
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.css}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.css}"></script>
 
     <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Grupowanie "marki" i przycisku rozwijania mobilnego menu -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
-                    <span class="sr-only">Rozwiń nawigację</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" th:href="@{/}">Bądź Wielki!</a>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <!-- Grupowanie elementów menu w celu lepszego wyświetlania na urządzeniach moblinych -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
-                <ul class="nav navbar-nav">
-                    <li ><a th:href="@{/exercises}">ĆWICZENIA</a></li>
-                    <li><a href="#">MOJE PLANY </a></li>
-                    <li><a href="#">STWÓRZ PLAN</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    PLANY TRENINGWE
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">STWÓRZ PLAN</a>
+                    <a class="dropdown-item" href="#">MOJE PLANY</a>
+                </div>
+            </li>
+        </ul>
+
+        <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+            <input type="submit" value="WYLOGUJ" class="btn btn-link navbar-btn navbar-link"/>
+        </form>
+
+    </div>
+</nav>
 
 
-    <div class="container">
+
+<div class="container">
         <div class="table-responsive" th:if="not ${exercises.isEmpty()}">
             <table class="table table-striped">
                 <tr>
