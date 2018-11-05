@@ -34,7 +34,7 @@
                 </ul>
 
                 <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
-                    <input type="submit" value="WYLOGUJ" class="btn btn-link navbar-btn navbar-link"/>
+                    <input type="submit" value="WYLOGUJ" class="btn btn-primary navbar-link"/>
                 </form>
 
             </div>
@@ -48,11 +48,11 @@
             <table class="table table-striped">
                 <tr>
                     <th>Nazwa</th>
-                    <th>Mięśnie</th>
+                    <th>Opis</th>
                 </tr>
                 <tr th:each="exercise: ${exercises}" th:object="${exercise}">
                     <td th:text="*{name}"></td>
-                    <td th:text="*{muscle}"></td>
+                    <td th:text="*{descryption}"></td>
                 </tr>
             </table>
         </div>

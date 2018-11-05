@@ -27,8 +27,11 @@ public class Exercise {
     @Column( nullable=false, length = 32)
     private String category;
 
-    // how to do
+    // polish descryption
     private String descryption;
+
+    // how to do
+    private String instruction;
 
     @OneToMany(mappedBy = "exercise",fetch = FetchType.EAGER)
     private List<ExerciseTraining> exerciseTrainings;
@@ -36,13 +39,14 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Exercise(String name, String type, String muscleGroup, String muscle, String category, String descryption) {
+    public Exercise(String name, String type, String muscleGroup, String muscle, String category, String descryption,String instruction) {
         this.name = name;
         this.type = type;
         this.muscleGroup = muscleGroup;
         this.muscle = muscle;
         this.category = category;
         this.descryption = descryption;
+        this.instruction = instruction;
     }
 
     public Long getId() {
@@ -109,4 +113,11 @@ public class Exercise {
         this.exerciseTrainings = exerciseTrainings;
     }
 
+    public String getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
+    }
 }

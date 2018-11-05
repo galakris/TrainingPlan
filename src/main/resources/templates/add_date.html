@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Time tracker</title>
+</head>
+<body>
+    <h1>Dodawanie dat</h1>
+    <form action="#" method="post" th:action="@{/addDate}" th:object="${date}">
+        <p>Util Date: <input type="date" th:field="*{utilDate}" /></p>
+        <p>Util Time: <input type="time"  th:field="*{utilTime}" /></p>
+        <input type="submit" value="Save" />
+    </form>
+</body>
+</html>

@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -32,19 +33,29 @@ public class Starter implements CommandLineRunner {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    DateTestRepository dateTestRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
+
+        dateTestRepository.save(
+                new DateTest(
+                        new SimpleDateFormat("yyyy-MM-dd").parse("2018-11-17"),
+                        new SimpleDateFormat("HH:mm").parse("09:15")
+                ));
+
         // dodanie cwiczen do bazy danych
         Stream.of(
-                new Exercise("Przysiad", "push", "lowerbody", "thigh|qlute|legs", "main", ""),
-                new Exercise("Martwy ciąg", "pull", "lowerbody", "thigh|qlute|legs", "main", ""),
-                new Exercise("Wykroki", "push", "lowerbody", "quad|qlute|legs", "accessor", ""),
-                new Exercise("Podciąganie", "pull", "upperbody", "lats|back", "main", ""),
-                new Exercise("Wiosłowanie", "pull", "upperbody", "lats|back", "main", ""),
-                new Exercise("Wyciskanie Żołnierskie", "push", "upperbody", "shoulder", "main", ""),
-                new Exercise("Wyciskanie hantli na łąwce", "push", "upperbody", "chest", "main", ""),
-                new Exercise("Deska", "", "core", "abs", "accessor", "")
+                new Exercise("Przysiad", "push", "lowerbody", "thigh|qlute|legs", "main", "Ćwiczenie kształtujące siłę dolnej części ciała",""),
+                new Exercise("Martwy ciąg", "pull", "lowerbody", "thigh|qlute|legs", "main", "Ćwiczenie kształtujące siłę dolnej części ciała",""),
+                new Exercise("Wykroki", "push", "lowerbody", "quad|qlute|legs", "accessor", "Ćwiczenie kształtujące siłę dolnej części ciała",""),
+                new Exercise("Podciąganie", "pull", "upperbody", "lats|back", "main", "Ćwiczenie kształtujące siłę pleców i ramion",""),
+                new Exercise("Wiosłowanie", "pull", "upperbody", "lats|back", "main", "Ćwiczenie kształtujące siłę pleców.",""),
+                new Exercise("Wyciskanie Żołnierskie", "push", "upperbody", "shoulder", "main", "Ćwiczenie kształtujące siłę barków. ",""),
+                new Exercise("Wyciskanie hantli na łąwce", "push", "upperbody", "chest", "main", "Ćwiczenie kształtujące siłę klatki piersiowej",""),
+                new Exercise("Deska", "", "core", "abs", "accessor", "Ćwiczenie kształtujące siłę brzucha","")
         ).forEach(exerciseRepository::save);
         // dodanie uzytkownikow
         Stream.of(
