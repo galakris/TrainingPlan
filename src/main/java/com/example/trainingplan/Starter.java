@@ -34,18 +34,162 @@ public class Starter implements CommandLineRunner {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    DateTestRepository dateTestRepository;
+    ExerciseSchemaRepository exerciseSchemaRepository;
+
+    @Autowired
+    ExerciseTypeRepository exerciseTypeRepository;
+
+    @Autowired
+    TrainingSchemaRepository trainingSchemaRepository;
 
     @Override
     public void run(String... args) throws Exception {
 
+        // dodanie schematów treningowych
+        Stream.of(
+                new TrainingSchema("FBW",  30 , "mass"),
+                new TrainingSchema("FBW",  30 , "strength"),
+                new TrainingSchema("FBW",  30 , "silm"),
+                new TrainingSchema("FBW",  60 , "mass"),
+                new TrainingSchema("FBW",  60 , "strength"),
+                new TrainingSchema("FBW",  60 , "silm"),
+                new TrainingSchema("FBW",  90 , "mass"),
+                new TrainingSchema("FBW",  90 , "strength"),
+                new TrainingSchema("FBW",  90 , "silm"),
+                new TrainingSchema("Split",  30 , "mass"),
+                new TrainingSchema("Split",  30 , "strength"),
+                new TrainingSchema("Split",  30 , "silm"),
+                new TrainingSchema("Split",  60 , "mass"),
+                new TrainingSchema("Split",  60 , "strength"),
+                new TrainingSchema("Split",  60 , "silm"),
+                new TrainingSchema("Split",  90 , "mass"),
+                new TrainingSchema("Split",  90 , "strength"),
+                new TrainingSchema("Split",  90 , "silm")
+        ).forEach(trainingSchemaRepository::save);
 
-        dateTestRepository.save(
-                new DateTest(
-                        new SimpleDateFormat("yyyy-MM-dd").parse("2018-11-17"),
-                        new SimpleDateFormat("HH:mm").parse("09:15")
-                ));
+        // dodanie typow cwiczen
+        Stream.of(
+                new ExerciseType("main", "push" , "lowerbody"),
+                new ExerciseType("main", "pull" , "lowerbody"),
+                new ExerciseType("main", "push|horizontal push" , "upperbody"),
+                new ExerciseType("main", "pull|horizontal pull" , "upperbody"),
+                new ExerciseType("main", "push|vertical push" , "upperbody"),
+                new ExerciseType("main", "pull|vertical pull" , "upperbody"),
+                new ExerciseType("accessor", "core" , "abs"),
+                new ExerciseType("accessor", "push" , "lowerbody"),
+                new ExerciseType("accessor", "pull" , "lowerbody"),
+                new ExerciseType("accessor", "push" , "upperbody"),
+                new ExerciseType("accessor", "pull" , "upperbody")
+        ).forEach(exerciseTypeRepository::save);
 
+
+
+        // Dodanie schematow cwiczeniowych
+        Stream.of(
+                new ExerciseSchema("A", 1, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
+                new ExerciseSchema("A", 2, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical push", "upperbody")),
+                new ExerciseSchema("A", 3, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical pull", "upperbody")),
+                new ExerciseSchema("A", 4, 3, 30, 30,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core" , "abs")),
+                new ExerciseSchema("B", 1, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
+                new ExerciseSchema("B", 2, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal push", "upperbody")),
+                new ExerciseSchema("B", 3, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal pull", "upperbody")),
+                new ExerciseSchema("B", 4, 3, 30, 30,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core" , "abs"))
+        ).forEach(exerciseSchemaRepository::save);
+
+        // dodanie cwiczen do bazy danych
+        Stream.of(
+                new Exercise("Przysiad", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
+                new Exercise("Martwy ciąg", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "pull", "lowerbody")),
+                new Exercise("Wykroki", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "push", "lowerbody")),
+                new Exercise("Podciąganie", "Ćwiczenie kształtujące siłę  pleców", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical pull" , "upperbody")),
+                new Exercise("Wiosłowanie", "Ćwiczenie kształtujące siłę pleców", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal pull", "upperbody")),
+                new Exercise("Wyciskanie żołnierskie", "Ćwiczenie kształtujące siłę obręczy barkowej", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical push", "upperbody")),
+                new Exercise("Wysiskanie sztangi na ławce", "Ćwiczenie kształtujące siłę klatki piersiowej", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal push", "upperbody")),
+                new Exercise("Deska", "Ćwiczenie kształtujące siłę mieśni brzucha", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core" , "abs")),
+                new Exercise("Deska bokiem", "Ćwiczenie kształtujące siłę mieśni brzucha", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core" , "abs"))
+        ).forEach(exerciseRepository::save);
+        // dodanie uzytkownikow
+        Stream.of(
+                new User("galakris", passwordEncoder.encode("galakris"), "Krzysztof" , "Gałuszka", "galakris@wp.pl" ),
+                new User("andrzejek", passwordEncoder.encode("12345"), "Andrzej" , "Wronek", "wronek@wp.pl" )
+        ).forEach(userRepository::save);
+
+        //dodanie planow treningowych
+        Stream.of(
+                new TrainingPlan("FBW", "Hard Mass!", userRepository.findById(1L).get()),
+                new TrainingPlan("Split", "Paprykowy koks", userRepository.findById(1L).get())
+        ).forEach(trainingPlanRepository::save);
+
+        // pobranie ID dodawanego planu treningowego
+        TrainingPlan trainingPlan = trainingPlanRepository.save(new TrainingPlan("FBW", "Wielka Klata", userRepository.findById(2L).get()));
+        System.out.println("ID treningu \"Wielka klata\":" + trainingPlan.getId());
+
+        //dodanie dni treningowych
+        List<TrainingDay> trainingDays = new ArrayList<>();
+        trainingDays.add(new TrainingDay("Trening A", trainingPlan));
+        trainingDays.add(new TrainingDay("Trening B", trainingPlan));
+
+        trainingDays.stream().forEach(trainingDayRepository::save);
+
+        // Podbranie dodanego planu treningowego z bazy i wyświetlnie informacji o dniach treningowych
+        trainingPlan = trainingPlanRepository.findById(3L).get();
+        trainingPlan.getTrainingDay().forEach(trainingDay -> System.out.println("ID: " + trainingDay.getId() + ", nazwa: " + trainingDay.getName()));
+
+        // Dodanie ExerciseTraining - przypisanie ćwieczeń do dni treningowych
+        Stream.of(
+                new ExerciseTraining(1, 3, 8, 60,
+                        exerciseRepository.findFirstByName("Przysiad"),
+                        trainingDays.get(0)),
+                new ExerciseTraining(2, 3, 8, 60,
+                        exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical push", "upperbody")) ,
+                        trainingDays.get(0)),
+                new ExerciseTraining(2, 3, 8, 60,
+                        exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical pull", "upperbody")) ,
+                        trainingDays.get(0)),
+                new ExerciseTraining(2, 3, 30, 30,
+                        exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core", "abs")) ,
+                        trainingDays.get(0)),
+                new ExerciseTraining(1, 3, 8, 60,
+                        exerciseRepository.findFirstByName("Martwy ciąg"),
+                        trainingDays.get(1)),
+                new ExerciseTraining(2, 3, 8, 60,
+                        exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal push", "upperbody")) ,
+                        trainingDays.get(1)),
+                new ExerciseTraining(2, 3, 8, 60,
+                        exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal pull", "upperbody")) ,
+                        trainingDays.get(1)),
+                new ExerciseTraining(2, 3, 30, 30,
+                        exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core", "abs")) ,
+                        trainingDays.get(1))
+        ).forEach(exerciseTrainingRepository::save);
+
+
+/*
         // dodanie cwiczen do bazy danych
         Stream.of(
                 new Exercise("Przysiad", "push", "lowerbody", "thigh|qlute|legs", "main", "Ćwiczenie kształtujące siłę dolnej części ciała",""),
@@ -93,5 +237,7 @@ public class Starter implements CommandLineRunner {
                 new ExerciseTraining(2, 3, 10, 60, exerciseRepository.findFirstByMuscleGroupAndType("upperbody", "push"),trainingDays.get(1)),
                 new ExerciseTraining(3, 3, 10, 60, exerciseRepository.findFirstByMuscleGroupAndType("upperbody", "pull"),trainingDays.get(1))
         ).forEach(exerciseTrainingRepository::save);
+        */
     }
+
 }

@@ -1,5 +1,8 @@
-package com.example.trainingplan;
+package com.example.trainingplan.workout;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TrainingGoal {
 
     // dlugosc treningu (min), 30/60
