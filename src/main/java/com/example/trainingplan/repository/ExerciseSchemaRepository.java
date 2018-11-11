@@ -1,11 +1,9 @@
 package com.example.trainingplan.repository;
 
-import com.example.trainingplan.model.User;
+import com.example.trainingplan.model.ExerciseSchema;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
-
-    User findByLogin(String login);
+public interface ExerciseSchemaRepository extends JpaRepository<ExerciseSchema, Long> {
 }

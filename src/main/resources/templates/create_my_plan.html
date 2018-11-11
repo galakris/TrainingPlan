@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Tworzenie planu treningowego</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PLANY TRENINGWE
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" th:href="@{/createPlan}">STWÓRZ PLAN</a>
+                        <a class="dropdown-item" href="#">MOJE PLANY</a>
+                    </div>
+                </li>
+            </ul>
+
+            <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+                <input type="submit" value="WYLOGUJ" class="btn btn-primary navbar-link" />
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <br /><br />
+
+    <form method="post" th:action="@{/createPlan}" th:object="${trainingGoal}" class="form-horizontal offset-sm-2 col-sm-8">
+        <div class="form-group">
+            <label for="goalSelect">Cel treningowy</label>
+            <select multiple class="form-control" id="goalSelect" th:field="*{goal}">
+                <option th:value="'strength'">Zwiększenie siły</option>
+                <option th:value="'mass'">Budowa masy mięśniowej</option>
+                <option th:value="'slim'">Redukcja tkanki tłuszczowej</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="frequencySelect">Liczba treningów w tygodniu</label>
+            <select class="form-control" id="frequencySelect" th:field="*{frequency}">
+                <option th:value="2">2</option>
+                <option th:value="3">3</option>
+                <option th:value="4">4</option>
+                <option th:value="5">5</option>
+                <option th:value="6">6</option>
+                <option th:value="7">7</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="lenghtSelect">Długość pojedyńczego treningu</label>
+            <select multiple class="form-control" id="lenghtSelect" th:field="*{length}">
+                <option th:value="4">Maksymalnie 30 min</option>
+                <option th:value="5">Maksymalnie 60 min</option>
+                <option th:value="6">Maksymalnie 90 min</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Miejsce treninguu</label>
+            <select multiple class="form-control" id="exampleFormControlSelect2" th:field="*{place}">
+                <option th:value="'gym'">Siłownia</option>
+                <option th:value="'plener'">Street workout</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-block"/>
+        </div>
+    </form>
+
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
