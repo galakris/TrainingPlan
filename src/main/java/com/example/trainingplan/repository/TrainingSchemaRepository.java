@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TrainingSchemaRepository extends JpaRepository<TrainingSchema, Long> {
-    TrainingSchema findFirstByTypeAndLengthAndAndGoal(String type, int length, String goal);
+    TrainingSchema findFirstByTypeAndLengthAndGoal(String type, int length, String goal);
 }

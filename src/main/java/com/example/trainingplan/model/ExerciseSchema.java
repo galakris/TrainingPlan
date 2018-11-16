@@ -10,7 +10,7 @@ public class ExerciseSchema {
     private Long id;
     // A/B
     @Column(length = 2)
-    private String trainingNumber;
+    private int trainingNumber;
 
     private int exerciseNumber;
 
@@ -32,7 +32,7 @@ public class ExerciseSchema {
     public ExerciseSchema() {
     }
 
-    public ExerciseSchema(String trainingNumber, int exerciseNumber, int sets, int reps, int rest, TrainingSchema trainingSchema, ExerciseType exerciseType) {
+    public ExerciseSchema(int trainingNumber, int exerciseNumber, int sets, int reps, int rest, TrainingSchema trainingSchema, ExerciseType exerciseType) {
         this.trainingNumber = trainingNumber;
         this.exerciseNumber = exerciseNumber;
         this.sets = sets;
@@ -50,11 +50,11 @@ public class ExerciseSchema {
         this.id = id;
     }
 
-    public String getTrainingNumber() {
+    public int getTrainingNumber() {
         return trainingNumber;
     }
 
-    public void setTrainingNumber(String trainingNumber) {
+    public void setTrainingNumber(int trainingNumber) {
         this.trainingNumber = trainingNumber;
     }
 
@@ -104,5 +104,17 @@ public class ExerciseSchema {
 
     public void setExerciseType(ExerciseType exerciseType) {
         this.exerciseType = exerciseType;
+    }
+
+    @Override
+    public String toString() {
+        return "ExerciseSchema{" +
+                "id=" + id +
+                ", trainingNumber=" + trainingNumber +
+                ", exerciseNumber=" + exerciseNumber +
+                ", sets=" + sets +
+                ", reps=" + reps +
+                ", rest=" + rest +
+                '}';
     }
 }

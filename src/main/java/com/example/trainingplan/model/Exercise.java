@@ -96,4 +96,12 @@ public class Exercise {
     public void setExerciseType(ExerciseType exerciseType) {
         this.exerciseType = exerciseType;
     }
+
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

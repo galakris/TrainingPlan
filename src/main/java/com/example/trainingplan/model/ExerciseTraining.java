@@ -36,36 +36,20 @@ public class ExerciseTraining {
         this.trainingDay = trainingDay;
     }
 
+    public ExerciseTraining(int number, int sets, int reps, int rest, Exercise exercise) {
+        this.number = number;
+        this.sets = sets;
+        this.reps = reps;
+        this.rest = rest;
+        this.exercise = exercise;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getReps() {
-        return reps;
-    }
-
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    public int getSets() {
-        return sets;
-    }
-
-    public void setSets(int sets) {
-        this.sets = sets;
-    }
-
-    public int getRest() {
-        return rest;
-    }
-
-    public void setRest(int rest) {
-        this.rest = rest;
     }
 
     public int getNumber() {
@@ -76,12 +60,36 @@ public class ExerciseTraining {
         this.number = number;
     }
 
-    public Exercise getExcercise() {
+    public int getSets() {
+        return sets;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
+    }
+
+    public int getReps() {
+        return reps;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
+    public int getRest() {
+        return rest;
+    }
+
+    public void setRest(int rest) {
+        this.rest = rest;
+    }
+
+    public Exercise getExercise() {
         return exercise;
     }
 
-    public void setExcercise(Exercise excercise) {
-        this.exercise = excercise;
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 
     public TrainingDay getTrainingDay() {
@@ -92,11 +100,15 @@ public class ExerciseTraining {
         this.trainingDay = trainingDay;
     }
 
-    public Exercise getExercise() {
-        return exercise;
-    }
-
-    public void setExercise(Exercise exercise) {
-        this.exercise = exercise;
+    @Override
+    public String toString() {
+        return "ExerciseTraining{" +
+                "id=" + id +
+                ", number=" + number +
+                ", sets=" + sets +
+                ", reps=" + reps +
+                ", rest=" + rest +
+                ", exercise=" + exercise +
+                '}';
     }
 }

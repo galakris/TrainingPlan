@@ -7,7 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -86,47 +85,59 @@ public class Starter implements CommandLineRunner {
 
         // Dodanie schematow cwiczeniowych
         Stream.of(
-                new ExerciseSchema("A", 1, 3, 8, 60,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                new ExerciseSchema(1, 1, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
-                new ExerciseSchema("A", 2, 3, 8, 60,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                new ExerciseSchema(1, 2, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical push", "upperbody")),
-                new ExerciseSchema("A", 3, 3, 8, 60,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                new ExerciseSchema(1, 3, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical pull", "upperbody")),
-                new ExerciseSchema("A", 4, 3, 30, 30,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                new ExerciseSchema(1, 4, 3, 30, 30,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core" , "abs")),
-                new ExerciseSchema("B", 1, 3, 8, 60,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
-                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
-                new ExerciseSchema("B", 2, 3, 8, 60,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                new ExerciseSchema(2, 1, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "pull", "lowerbody")),
+                new ExerciseSchema(2, 2, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal push", "upperbody")),
-                new ExerciseSchema("B", 3, 3, 8, 60,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                new ExerciseSchema(2, 3, 3, 8, 60,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal pull", "upperbody")),
-                new ExerciseSchema("B", 4, 3, 30, 30,
-                        trainingSchemaRepository.findFirstByTypeAndLengthAndAndGoal("FBW", 30, "mass"),
+                new ExerciseSchema(2, 4, 3, 30, 30,
+                        trainingSchemaRepository.findFirstByTypeAndLengthAndGoal("FBW", 30, "mass"),
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core" , "abs"))
         ).forEach(exerciseSchemaRepository::save);
 
         // dodanie cwiczen do bazy danych
         Stream.of(
-                new Exercise("Przysiad", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                new Exercise("Przysiad przedni", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
-                new Exercise("Martwy ciąg", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                new Exercise("Przysiad ze sztangą", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
+                new Exercise("Przysiad bułgarski", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "push", "lowerbody")),
+                new Exercise("Martwy ciąg klasyczny", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "pull", "lowerbody")),
+                new Exercise("Martwy ciąg sumo", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "pull", "lowerbody")),
                 new Exercise("Wykroki", "Ćwiczenie kształtujące siłę dolnej części ciała", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "push", "lowerbody")),
                 new Exercise("Podciąganie", "Ćwiczenie kształtujące siłę  pleców", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical pull" , "upperbody")),
-                new Exercise("Wiosłowanie", "Ćwiczenie kształtujące siłę pleców", "",
+                new Exercise("Wiosłowanie sztangą", "Ćwiczenie kształtujące siłę pleców", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal pull", "upperbody")),
+                new Exercise("Wiosłowanie hantlem", "Ćwiczenie kształtujące siłę pleców", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal pull", "upperbody")),
                 new Exercise("Wyciskanie żołnierskie", "Ćwiczenie kształtujące siłę obręczy barkowej", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical push", "upperbody")),
+                new Exercise("Wyciskanie hantli stojąc", "Ćwiczenie kształtujące siłę obręczy barkowej", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical push", "upperbody")),
                 new Exercise("Wysiskanie sztangi na ławce", "Ćwiczenie kształtujące siłę klatki piersiowej", "",
+                        exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal push", "upperbody")),
+                new Exercise("Wysiskanie hantli na ławce", "Ćwiczenie kształtujące siłę klatki piersiowej", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal push", "upperbody")),
                 new Exercise("Deska", "Ćwiczenie kształtujące siłę mieśni brzucha", "",
                         exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core" , "abs")),

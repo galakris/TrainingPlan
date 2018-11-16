@@ -47,7 +47,7 @@
 <div class="container">
     <br /><br />
 
-    <form method="post" th:action="@{/createPlan}" th:object="${trainingGoal}" class="form-horizontal offset-sm-2 col-sm-8">
+    <form method="post" th:action="@{/chooseExercises}" th:object="${trainingGoal}" class="form-horizontal offset-sm-2 col-sm-8">
         <div class="form-group">
             <label for="goalSelect">Cel treningowy</label>
             <select multiple class="form-control" id="goalSelect" th:field="*{goal}">
@@ -72,9 +72,9 @@
         <div class="form-group">
             <label for="lenghtSelect">Długość pojedyńczego treningu</label>
             <select multiple class="form-control" id="lenghtSelect" th:field="*{length}">
-                <option th:value="4">Maksymalnie 30 min</option>
-                <option th:value="5">Maksymalnie 60 min</option>
-                <option th:value="6">Maksymalnie 90 min</option>
+                <option th:value="30">Maksymalnie 30 min</option>
+                <option th:value="60">Maksymalnie 60 min</option>
+                <option th:value="90">Maksymalnie 90 min</option>
             </select>
         </div>
 
@@ -86,7 +86,7 @@
             </select>
         </div>
         <div class="form-group">
-            <input type="submit" value="Register" class="btn btn-block"/>
+            <input type="submit" value="Register" class="btn btn-block btn-primary"/>
         </div>
     </form>
 

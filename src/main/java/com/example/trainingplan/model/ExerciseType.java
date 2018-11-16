@@ -85,5 +85,13 @@ public class ExerciseType {
         this.exercises = exercises;
     }
 
-
+    @Override
+    public String toString() {
+        return "ExerciseType{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", type='" + type + '\'' +
+                ", muscleGroup='" + muscleGroup + '\'' +
+                '}';
+    }
 }

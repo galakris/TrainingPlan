@@ -68,5 +68,13 @@ public class TrainingSchema {
         this.exerciseSchemas = exerciseSchemas;
     }
 
-
+    @Override
+    public String toString() {
+        return "TrainingSchema{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", length=" + length +
+                ", goal='" + goal + '\'' +
+                '}';
+    }
 }

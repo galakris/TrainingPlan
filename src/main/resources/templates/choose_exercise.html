@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Tworzenie planu treningowego</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
+
+</head>
+<body>
+
+<div class="container">
+    <br /><br />
+
+
+    <form action="#" method="post" th:action="@{/saveWorkout}" class="form-horizontal offset-sm-2 col-sm-8" th:object="${wrapper}">
+
+        <div class="form-group" th:each="chooseExercise : ${wrapper.chooseExercises}">
+
+                <h3 class="text-center text-info" th:text="'ĆWICZENIE ' + ${chooseExercise.exerciseTraining.number}"></h3>
+                <div th:each="exercisre: ${chooseExercise.exercises}" class="list-group-item">
+                    <label class="text-secondary">
+                        <input type="radio"
+                               th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.exercise.name}"
+                               th:value="${exercisre.name}" th:text="${exercisre.name}" />
+                    </label>
+                </div>
+
+            <!--
+            <h3 class="text-center text-info" th:text="'ĆWICZENIE ' + ${chooseExercise.exerciseTraining.number}"></h3>
+            <ul class="list-group">
+                <li th:each="exercise: ${chooseExercise.exercises}" th:text="'ID: ' + ${exercise.id} + ' - ' + ${exercise.name}" class="list-group-item"></li>
+            </ul><br />
+            <input type="number" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.exercise.id}" placeholder="ID ćwiczenia" class="form-control"/>
+            -->
+
+            <!-- select option
+            <label for="exerciseSelect">Wybierz ćwiczenie</label>
+            <select  th:filed="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.exercise.id}" class="form-control" id="exerciseSelect">
+                <option th:each="exercise: ${chooseExercise.exercises}" th:text="${exercise.name}" th:value="${exercise.id}"/>
+            </select>
+            -->
+            <!-- ustawienie pozostalych pol -->
+            <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.reps}" placeholder="Powtorzenia" class="form-control" />
+            <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.number}" placeholder="Powtorzenia" class="form-control" />
+            <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.sets}" placeholder="Powtorzenia" class="form-control" />
+            <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.rest}" placeholder="Powtorzenia" class="form-control" />
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-block btn-primary"/>
+        </div>
+
+
+    </form>
+
+
+
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
