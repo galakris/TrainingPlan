@@ -13,7 +13,7 @@ public class TrainingPlan {
     private String type;
     private String name;
     @OneToMany(mappedBy = "trainingPlan",fetch = FetchType.EAGER)
-    private List <TrainingDay> trainingDay;
+    private List <ExerciseTraining> exerciseTrainings;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -52,12 +52,12 @@ public class TrainingPlan {
         this.name = name;
     }
 
-    public List<TrainingDay> getTrainingDay() {
-        return trainingDay;
+    public List<ExerciseTraining> getExerciseTrainings() {
+        return exerciseTrainings;
     }
 
-    public void setTrainingDay(List<TrainingDay> trainingDay) {
-        this.trainingDay = trainingDay;
+    public void setExerciseTrainings(List<ExerciseTraining> exerciseTrainings) {
+        this.exerciseTrainings = exerciseTrainings;
     }
 
     public User getUser() {
@@ -68,4 +68,13 @@ public class TrainingPlan {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return "TrainingPlan{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

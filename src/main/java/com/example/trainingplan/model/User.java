@@ -93,4 +93,16 @@ public class User {
     public void setTrainingPlans(List<TrainingPlan> trainingPlans) {
         this.trainingPlans = trainingPlans;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

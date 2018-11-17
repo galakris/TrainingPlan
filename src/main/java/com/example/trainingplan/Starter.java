@@ -24,9 +24,6 @@ public class Starter implements CommandLineRunner {
     TrainingPlanRepository trainingPlanRepository;
 
     @Autowired
-    TrainingDayRepository trainingDayRepository;
-
-    @Autowired
     ExerciseTrainingRepository exerciseTrainingRepository;
 
     @Autowired
@@ -160,43 +157,43 @@ public class Starter implements CommandLineRunner {
         TrainingPlan trainingPlan = trainingPlanRepository.save(new TrainingPlan("FBW", "Wielka Klata", userRepository.findById(2L).get()));
         System.out.println("ID treningu \"Wielka klata\":" + trainingPlan.getId());
 
-        //dodanie dni treningowych
-        List<TrainingDay> trainingDays = new ArrayList<>();
-        trainingDays.add(new TrainingDay("Trening A", trainingPlan));
-        trainingDays.add(new TrainingDay("Trening B", trainingPlan));
-
-        trainingDays.stream().forEach(trainingDayRepository::save);
-
-        // Podbranie dodanego planu treningowego z bazy i wyświetlnie informacji o dniach treningowych
-        trainingPlan = trainingPlanRepository.findById(3L).get();
-        trainingPlan.getTrainingDay().forEach(trainingDay -> System.out.println("ID: " + trainingDay.getId() + ", nazwa: " + trainingDay.getName()));
+//        //dodanie dni treningowych
+//        List<TrainingDay> trainingDays = new ArrayList<>();
+//        trainingDays.add(new TrainingDay("Trening A", trainingPlan));
+//        trainingDays.add(new TrainingDay("Trening B", trainingPlan));
+//
+//        trainingDays.stream().forEach(trainingDayRepository::save);
+//
+//        // Podbranie dodanego planu treningowego z bazy i wyświetlnie informacji o dniach treningowych
+//        trainingPlan = trainingPlanRepository.findById(3L).get();
+//        trainingPlan.getTrainingDay().forEach(trainingDay -> System.out.println("ID: " + trainingDay.getId() + ", nazwa: " + trainingDay.getName()));
 
         // Dodanie ExerciseTraining - przypisanie ćwieczeń do dni treningowych
         Stream.of(
-                new ExerciseTraining(1, 3, 8, 60,
-                        exerciseRepository.findFirstByName("Przysiad"),
-                        trainingDays.get(0)),
-                new ExerciseTraining(2, 3, 8, 60,
+                new ExerciseTraining(1, "Trening A", 3, 8, 60,
+                        exerciseRepository.findFirstByName("Przysiad ze sztangą"),
+                        trainingPlan),
+                new ExerciseTraining(2, "Trening A", 3, 8, 60,
                         exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical push", "upperbody")) ,
-                        trainingDays.get(0)),
-                new ExerciseTraining(2, 3, 8, 60,
+                        trainingPlan),
+                new ExerciseTraining(2, "Trening A", 3, 8, 60,
                         exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "vertical pull", "upperbody")) ,
-                        trainingDays.get(0)),
-                new ExerciseTraining(2, 3, 30, 30,
+                        trainingPlan),
+                new ExerciseTraining(2, "Trening A", 3, 30, 30,
                         exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core", "abs")) ,
-                        trainingDays.get(0)),
-                new ExerciseTraining(1, 3, 8, 60,
-                        exerciseRepository.findFirstByName("Martwy ciąg"),
-                        trainingDays.get(1)),
-                new ExerciseTraining(2, 3, 8, 60,
+                        trainingPlan),
+                new ExerciseTraining(1, "Trening B", 3, 8, 60,
+                        exerciseRepository.findFirstByName("Martwy ciąg klasyczny"),
+                        trainingPlan),
+                new ExerciseTraining(2, "Trening B", 3, 8, 60,
                         exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal push", "upperbody")) ,
-                        trainingDays.get(1)),
-                new ExerciseTraining(2, 3, 8, 60,
+                        trainingPlan),
+                new ExerciseTraining(2, "Trening B", 3, 8, 60,
                         exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("main", "horizontal pull", "upperbody")) ,
-                        trainingDays.get(1)),
-                new ExerciseTraining(2, 3, 30, 30,
+                        trainingPlan),
+                new ExerciseTraining(2, "Trening B", 3, 30, 30,
                         exerciseRepository.findFirstByExerciseType(exerciseTypeRepository.findFirstByCategoryAndTypeContainingAndMuscleGroup("accessor", "core", "abs")) ,
-                        trainingDays.get(1))
+                        trainingPlan)
         ).forEach(exerciseTrainingRepository::save);
 
 
@@ -249,6 +246,7 @@ public class Starter implements CommandLineRunner {
                 new ExerciseTraining(3, 3, 10, 60, exerciseRepository.findFirstByMuscleGroupAndType("upperbody", "pull"),trainingDays.get(1))
         ).forEach(exerciseTrainingRepository::save);
         */
+
     }
 
 }

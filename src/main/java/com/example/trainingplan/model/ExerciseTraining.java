@@ -16,24 +16,27 @@ public class ExerciseTraining {
     private int reps;
     // dlugosc przerwy miedzy seriami (s)
     private int rest;
+    // nazwa dnia treningwego
+    private String trainingDayNumber;
 
     @ManyToOne
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
     @ManyToOne
-    @JoinColumn(name = "training_day_id")
-    private TrainingDay trainingDay;
+    @JoinColumn(name = "training_plan_id")
+    private TrainingPlan trainingPlan;
 
     public ExerciseTraining() {
     }
 
-    public ExerciseTraining(int number, int sets, int reps, int rest, Exercise exercise, TrainingDay trainingDay) {
+    public ExerciseTraining(int number, String trainingDayNumber ,int sets, int reps, int rest, Exercise exercise, TrainingPlan trainingPlan) {
         this.number = number;
+        this.trainingDayNumber = trainingDayNumber;
         this.sets = sets;
         this.reps = reps;
         this.rest = rest;
         this.exercise = exercise;
-        this.trainingDay = trainingDay;
+        this.trainingPlan = trainingPlan;
     }
 
     public ExerciseTraining(int number, int sets, int reps, int rest, Exercise exercise) {
@@ -58,6 +61,14 @@ public class ExerciseTraining {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public String getTrainingDayNumber() {
+        return trainingDayNumber;
+    }
+
+    public void setTrainingDayNumber(String trainingDayNumber) {
+        this.trainingDayNumber = trainingDayNumber;
     }
 
     public int getSets() {
@@ -92,12 +103,12 @@ public class ExerciseTraining {
         this.exercise = exercise;
     }
 
-    public TrainingDay getTrainingDay() {
-        return trainingDay;
+    public TrainingPlan getTrainingPlan() {
+        return trainingPlan;
     }
 
-    public void setTrainingDay(TrainingDay trainingDay) {
-        this.trainingDay = trainingDay;
+    public void setTrainingPlan(TrainingPlan trainingPlan) {
+        this.trainingPlan = trainingPlan;
     }
 
     @Override
@@ -108,7 +119,9 @@ public class ExerciseTraining {
                 ", sets=" + sets +
                 ", reps=" + reps +
                 ", rest=" + rest +
+                ", trainingDayNumber='" + trainingDayNumber + '\'' +
                 ", exercise=" + exercise +
+                ", trainingPlan=" + trainingPlan +
                 '}';
     }
 }

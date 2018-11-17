@@ -1,12 +1,13 @@
 package com.example.trainingplan.controllers;
 
 import com.example.trainingplan.model.*;
-import com.example.trainingplan.repository.*;
+import com.example.trainingplan.service.ExerciseService;
+import com.example.trainingplan.service.TrainingService;
+import com.example.trainingplan.service.UserService;
 import com.example.trainingplan.workout.ChooseExercises;
 import com.example.trainingplan.workout.TrainingGoal;
 import com.example.trainingplan.workout.Wrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,20 +24,13 @@ import java.util.ArrayList;
 public class TrainingPlanControlller {
 
     @Autowired
-    ExerciseTypeRepository exerciseTypeRepository;
+    UserService userService;
 
     @Autowired
-    TrainingSchemaRepository trainingSchemaRepository;
+    TrainingService trainingService;
 
     @Autowired
-    ExerciseRepository exerciseRepository;
-
-    @Autowired
-    ExerciseSchemaRepository exerciseSchemaRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
+    ExerciseService exerciseService;
 
     @GetMapping("/createPlan")
     public String createPlan(Model model){
@@ -45,11 +39,13 @@ public class TrainingPlanControlller {
     }
 
     @PostMapping("/saveWorkout")
-    public String savePlan(@ModelAttribute Wrapper wrapper, Model model){
+    public String savePlan(@ModelAttribute @Valid Wrapper wrapper, BindingResult bindingResult, Model model){
 
-        for (ChooseExercises chooseExercises : wrapper.getChooseExercises()) {
-            chooseExercises.getExerciseTraining().setExercise(exerciseRepository.findFirstByName(chooseExercises.getExerciseTraining().getExercise().getName()));
+        if(bindingResult.hasErrors()){
+            return "redirect:/createPlan";
         }
+
+        trainingService.saveWorkout(wrapper);
 
         return "index";
     }
@@ -58,23 +54,24 @@ public class TrainingPlanControlller {
     public String createPlan(@ModelAttribute TrainingGoal trainingGoal, Model model){
 
         // Pobranie odpowiedniego schematu treningowego
-        String type = (trainingGoal.getFrequency() < 4) ? "FBW" : "Split";
-        TrainingSchema trainingSchema = trainingSchemaRepository.findFirstByTypeAndLengthAndGoal(type, trainingGoal.getLength(), trainingGoal.getGoal());
+        String type = trainingService.determineTrainingType(trainingGoal.getFrequency());
+        TrainingSchema trainingSchema = trainingService.findFirstSchemaByTypeAndLengthAndGoal(type, trainingGoal.getLength(), trainingGoal.getGoal());
 
         // tworzenie lista zawierajacej odpowiednie cwiczenia do wyboru oraz sposob ich wykonania
         Wrapper wrapper = new Wrapper();
 
         for(ExerciseSchema exerciseSchema: trainingSchema.getExerciseSchemas()){
-            ExerciseType exerciseType = exerciseSchemaRepository.findFirstByExerciseNumberAndTrainingNumberAndTrainingSchema(
+
+            ExerciseType exerciseType = exerciseService.findFirstSchemaByExerciseNumberAndTrainingNumberAndTrainingSchema(
                     exerciseSchema.getExerciseNumber(),
                     exerciseSchema.getTrainingNumber(),
                     trainingSchema).getExerciseType();
 
             wrapper.getChooseExercises().add(new ChooseExercises(
-                    new ExerciseTraining(exerciseSchema.getExerciseNumber(), exerciseSchema.getSets(), exerciseSchema.getReps(), exerciseSchema.getRest(),
-                            exerciseRepository.findFirstByExerciseType(exerciseType),
-                            new TrainingDay(exerciseSchema.getTrainingNumber(), new TrainingPlan(type, "", userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName())))),
-                    new ArrayList<>(exerciseRepository.findAllByExerciseType(exerciseType))));
+                    new ExerciseTraining(exerciseSchema.getExerciseNumber(), exerciseSchema.getTrainingNumber(),exerciseSchema.getSets(), exerciseSchema.getReps(), exerciseSchema.getRest(),
+                            exerciseService.findFirstExerciseByExerciseType(exerciseType),
+                            new TrainingPlan(type, "", userService.findUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()))),
+                    new ArrayList<>(exerciseService.findAllExerciseByExerciseType(exerciseType))));
         }
 
         model.addAttribute("wrapper", wrapper);
