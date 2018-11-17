@@ -10,7 +10,7 @@ public class ExerciseSchema {
     private Long id;
     // A/B
     @Column(length = 2)
-    private int trainingNumber;
+    private String trainingNumber;
 
     private int exerciseNumber;
 
@@ -32,7 +32,7 @@ public class ExerciseSchema {
     public ExerciseSchema() {
     }
 
-    public ExerciseSchema(int trainingNumber, int exerciseNumber, int sets, int reps, int rest, TrainingSchema trainingSchema, ExerciseType exerciseType) {
+    public ExerciseSchema(String trainingNumber, int exerciseNumber, int sets, int reps, int rest, TrainingSchema trainingSchema, ExerciseType exerciseType) {
         this.trainingNumber = trainingNumber;
         this.exerciseNumber = exerciseNumber;
         this.sets = sets;
@@ -50,11 +50,11 @@ public class ExerciseSchema {
         this.id = id;
     }
 
-    public int getTrainingNumber() {
+    public String getTrainingNumber() {
         return trainingNumber;
     }
 
-    public void setTrainingNumber(int trainingNumber) {
+    public void setTrainingNumber(String trainingNumber) {
         this.trainingNumber = trainingNumber;
     }
 

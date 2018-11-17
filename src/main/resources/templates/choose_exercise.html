@@ -19,7 +19,7 @@
 
         <div class="form-group" th:each="chooseExercise : ${wrapper.chooseExercises}">
 
-                <h3 class="text-center text-info" th:text="'ĆWICZENIE ' + ${chooseExercise.exerciseTraining.number}"></h3>
+                <h3 class="text-center text-info" th:text="'TRENING ' + ${chooseExercise.exerciseTraining.trainingDay.name} + ', ĆWICZENIE ' + ${chooseExercise.exerciseTraining.number}"></h3>
                 <div th:each="exercisre: ${chooseExercise.exercises}" class="list-group-item">
                     <label class="text-secondary">
                         <input type="radio"
@@ -47,6 +47,7 @@
             <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.number}" placeholder="Powtorzenia" class="form-control" />
             <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.sets}" placeholder="Powtorzenia" class="form-control" />
             <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.rest}" placeholder="Powtorzenia" class="form-control" />
+            <input type="hidden" th:field="*{chooseExercises[__${chooseExerciseStat.index}__].exerciseTraining.trainingDay.name}" placeholder="Powtorzenia" class="form-control" />
 
         </div>
 

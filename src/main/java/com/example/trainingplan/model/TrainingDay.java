@@ -25,6 +25,10 @@ public class TrainingDay {
         this.trainingPlan = trainingPlan;
     }
 
+    public TrainingDay(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

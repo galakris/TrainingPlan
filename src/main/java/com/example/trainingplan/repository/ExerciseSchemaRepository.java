@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExerciseSchemaRepository extends JpaRepository<ExerciseSchema, Long> {
 
-    ExerciseSchema findFirstByExerciseNumberAndTrainingNumberAndTrainingSchema(int exerciseNumber, int trainingNumber, TrainingSchema trainingSchema);
+    ExerciseSchema findFirstByExerciseNumberAndTrainingNumberAndTrainingSchema(int exerciseNumber, String trainingNumber, TrainingSchema trainingSchema);
 }

@@ -8,62 +8,61 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
 
 </head>
-<body>
+<body style="background-color: #888888">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            PLANY TRENINGWE
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#" th:href="@{/createPlan}">STWÓRZ PLAN</a>
-                            <a class="dropdown-item" href="#">MOJE PLANY</a>
-                        </div>
-                    </li>
-                </ul>
-
-                <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
-                    <input type="submit" value="WYLOGUJ" class="btn btn-primary navbar-link"/>
-                </form>
-
-            </div>
-        </div>
-    </nav>
-
-
-
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-info mb-2">
     <div class="container">
-        <div class="table-responsive" th:if="not ${exercises.isEmpty()}">
-            <table class="table table-striped">
-                <tr>
-                    <th>Nazwa</th>
-                    <th>Opis</th>
-                </tr>
-                <tr th:each="exercise: ${exercises}" th:object="${exercise}">
-                    <td th:text="*{name}"></td>
-                    <td th:text="*{descryption}"></td>
-                </tr>
-            </table>
-        </div>
-        <div th:if="${exercises.isEmpty()}">
-            <h1>Brak ćwiczeń</h1>
+        <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/exercises}">ĆWICZENIA</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PLANY TRENINGWE
+                    </a>
+                    <div class="dropdown-menu bg-info" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-light" href="#" th:href="@{/createPlan}">STWÓRZ PLAN</a>
+                        <a class="dropdown-item text-light" href="#">MOJE PLANY</a>
+                    </div>
+                </li>
+            </ul>
+
+            <form action="logout" th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+                <input type="submit" value="WYLOGUJ" class="btn btn-outline-light btn-rounded btn-block waves-effect z-depth-0"/>
+            </form>
+
         </div>
     </div>
+</nav>
 
-    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+<div class="container card bg-light px-0">
+    <div class="table-responsive" th:if="not ${exercises.isEmpty()}">
+        <table class="table table-striped">
+            <tr class="card-header bg-info">
+                <th class="text-light">Nazwa</th>
+                <th class="text-light">Opis</th>
+            </tr>
+            <tr th:each="exercise: ${exercises}" th:object="${exercise}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{descryption}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${exercises.isEmpty()}">
+        <h2 class="text-center" style="color: red">BRAK ĆWICZEŃ</h2>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
 
 </body>
 </html>

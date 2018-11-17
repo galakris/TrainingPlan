@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/createPlan").permitAll()
                 .antMatchers("/chooseExercises").permitAll()
                 .antMatchers("/saveWorkout").permitAll()
+                .antMatchers("/exercises").permitAll()
                 .antMatchers("/date").permitAll()
                 .antMatchers("/addDate").permitAll()
                     .antMatchers("/webjars/**").permitAll()

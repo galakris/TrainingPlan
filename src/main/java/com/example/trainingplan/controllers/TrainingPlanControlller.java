@@ -1,14 +1,13 @@
 package com.example.trainingplan.controllers;
 
 import com.example.trainingplan.model.*;
-import com.example.trainingplan.repository.ExerciseRepository;
-import com.example.trainingplan.repository.ExerciseSchemaRepository;
-import com.example.trainingplan.repository.ExerciseTypeRepository;
-import com.example.trainingplan.repository.TrainingSchemaRepository;
+import com.example.trainingplan.repository.*;
 import com.example.trainingplan.workout.ChooseExercises;
 import com.example.trainingplan.workout.TrainingGoal;
 import com.example.trainingplan.workout.Wrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +33,9 @@ public class TrainingPlanControlller {
 
     @Autowired
     ExerciseSchemaRepository exerciseSchemaRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
 
     @GetMapping("/createPlan")
@@ -69,7 +71,9 @@ public class TrainingPlanControlller {
                     trainingSchema).getExerciseType();
 
             wrapper.getChooseExercises().add(new ChooseExercises(
-                    new ExerciseTraining(exerciseSchema.getExerciseNumber(), exerciseSchema.getSets(), exerciseSchema.getReps(), exerciseSchema.getRest(), exerciseRepository.findFirstByExerciseType(exerciseType)),
+                    new ExerciseTraining(exerciseSchema.getExerciseNumber(), exerciseSchema.getSets(), exerciseSchema.getReps(), exerciseSchema.getRest(),
+                            exerciseRepository.findFirstByExerciseType(exerciseType),
+                            new TrainingDay(exerciseSchema.getTrainingNumber(), new TrainingPlan(type, "", userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName())))),
                     new ArrayList<>(exerciseRepository.findAllByExerciseType(exerciseType))));
         }
 
