@@ -12,15 +12,18 @@ public class Exercise {
     @Column( nullable=false, length = 32)
     private String name;
 
-    /*// chest, back, biceps,
-    @Column( nullable=false, length = 32)
-    private String muscle;*/
+    // chest, back, biceps,
+    //@Column( nullable=false, length = 32)
+    private String muscle;
 
     // polish descryption
     private String descryption;
 
     // how to do
     private String instruction;
+
+    // street workout available
+    private boolean streetWorkout;
 
     @OneToMany(mappedBy = "exercise",fetch = FetchType.EAGER)
     private List<ExerciseTraining> exerciseTrainings;
@@ -33,11 +36,12 @@ public class Exercise {
     }
 
 
-    public Exercise(String name, /*String muscle,*/ String descryption, String instruction, ExerciseType exerciseType) {
+    public Exercise(String name, String descryption, String muscle, String instruction, boolean streetWorkout, ExerciseType exerciseType) {
         this.name = name;
-        //this.muscle = muscle;
+        this.muscle = muscle;
         this.descryption = descryption;
         this.instruction = instruction;
+        this.streetWorkout = streetWorkout;
         this.exerciseType = exerciseType;
     }
 
@@ -56,7 +60,7 @@ public class Exercise {
     public void setName(String name) {
         this.name = name;
     }
-/*
+
     public String getMuscle() {
         return muscle;
     }
@@ -64,7 +68,15 @@ public class Exercise {
     public void setMuscle(String muscle) {
         this.muscle = muscle;
     }
-*/
+
+    public boolean isStreetWorkout() {
+        return streetWorkout;
+    }
+
+    public void setStreetWorkout(boolean streetWorkout) {
+        this.streetWorkout = streetWorkout;
+    }
+
     public String getDescryption() {
         return descryption;
     }

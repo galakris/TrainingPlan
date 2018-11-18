@@ -42,15 +42,17 @@
 </nav>
 
 
-<div class="container card bg-light px-0">
+<div class="container card bg-light px-0 mb-2">
     <div class="table-responsive" th:if="not ${exercises.isEmpty()}">
         <table class="table table-striped">
             <tr class="card-header bg-info">
                 <th class="text-light">Nazwa</th>
+                <th class="text-light">Mięśnie</th>
                 <th class="text-light">Opis</th>
             </tr>
             <tr th:each="exercise: ${exercises}" th:object="${exercise}">
                 <td th:text="*{name}"></td>
+                <td th:text="*{muscle}"></td>
                 <td th:text="*{descryption}"></td>
             </tr>
         </table>
