@@ -51,7 +51,6 @@ public class TrainingPlanControlller {
     @GetMapping("/workout")
     public String getTraining(@RequestParam("id") Long id, Model model) {
         TrainingPlan trainingPlan = trainingService.getTrainingPlan(id);
-        System.out.println(id);
         model.addAttribute("trainingPlan", trainingPlan);
         model.addAttribute("exerciseTrainings", trainingPlan.getExerciseTrainings());
         return "workout";

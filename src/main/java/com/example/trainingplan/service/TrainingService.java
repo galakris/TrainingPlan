@@ -1,6 +1,5 @@
 package com.example.trainingplan.service;
 
-import com.example.trainingplan.model.Exercise;
 import com.example.trainingplan.model.TrainingPlan;
 import com.example.trainingplan.model.TrainingSchema;
 import com.example.trainingplan.repository.*;
