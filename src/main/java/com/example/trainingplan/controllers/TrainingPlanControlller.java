@@ -15,9 +15,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -38,6 +40,23 @@ public class TrainingPlanControlller {
         return "create_my_plan";
     }
 
+    @GetMapping("/myWorkouts")
+    public String getTrainings(Model model){
+
+        List<TrainingPlan> userTrainingPlans = trainingService.findAllTrainingPlansByUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("userTrainingPlans", userTrainingPlans);
+        return "workouts";
+    }
+
+    @GetMapping("/workout")
+    public String getTraining(@RequestParam("id") Long id, Model model) {
+        TrainingPlan trainingPlan = trainingService.getTrainingPlan(id);
+        System.out.println(id);
+        model.addAttribute("trainingPlan", trainingPlan);
+        model.addAttribute("exerciseTrainings", trainingPlan.getExerciseTrainings());
+        return "workout";
+    }
+
     @PostMapping("/saveWorkout")
     public String savePlan(@ModelAttribute @Valid Wrapper wrapper, BindingResult bindingResult, Model model){
 
@@ -47,7 +66,7 @@ public class TrainingPlanControlller {
 
         trainingService.saveWorkout(wrapper);
 
-        return "index";
+        return "redirect:myWorkouts";
     }
 
     @PostMapping("/chooseExercises")

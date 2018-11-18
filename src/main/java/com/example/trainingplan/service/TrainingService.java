@@ -1,17 +1,16 @@
 package com.example.trainingplan.service;
 
+import com.example.trainingplan.model.Exercise;
 import com.example.trainingplan.model.TrainingPlan;
 import com.example.trainingplan.model.TrainingSchema;
-import com.example.trainingplan.repository.ExerciseRepository;
-import com.example.trainingplan.repository.ExerciseTrainingRepository;
-import com.example.trainingplan.repository.TrainingPlanRepository;
-import com.example.trainingplan.repository.TrainingSchemaRepository;
+import com.example.trainingplan.repository.*;
 import com.example.trainingplan.workout.ChooseExercises;
 import com.example.trainingplan.workout.Wrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TrainingService {
@@ -27,6 +26,9 @@ public class TrainingService {
 
     @Autowired
     TrainingSchemaRepository trainingSchemaRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     public void saveWorkout(Wrapper wrapper){
 
@@ -70,5 +72,13 @@ public class TrainingService {
 
     public TrainingSchema findFirstSchemaByTypeAndLengthAndGoal(String type, int length, String goal) {
         return trainingSchemaRepository.findFirstByTypeAndLengthAndGoal(type,length,goal);
+    }
+
+    public List<TrainingPlan> findAllTrainingPlansByUser(String name) {
+        return trainingPlanRepository.findAllByUser(userRepository.findByLogin(name));
+    }
+
+    public TrainingPlan getTrainingPlan(Long id) {
+        return trainingPlanRepository.findById(id).get();
     }
 }

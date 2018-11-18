@@ -204,7 +204,6 @@ public class Starter implements CommandLineRunner {
                         trainingPlan)
         ).forEach(exerciseTrainingRepository::save);
 
-
 /*
         // dodanie cwiczen do bazy danych
         Stream.of(
