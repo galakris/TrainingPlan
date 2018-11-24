@@ -10,7 +10,9 @@ public class TrainingPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // FBW/Split
+    @Column(nullable = false, length = 16)
     private String type;
+    @Column(nullable = false, length = 32)
     private String name;
     @OneToMany(mappedBy = "trainingPlan",fetch = FetchType.EAGER)
     private List <ExerciseTraining> exerciseTrainings;

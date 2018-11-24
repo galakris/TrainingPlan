@@ -19,10 +19,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeForAuthenticatedUser(Principal principal, Model model){
-        System.out.println(principal.getName());
+        //System.out.println(principal.getName());
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
+        //System.out.println(auth.getName());
         model.addAttribute("name", auth.getName());
 
         return "index";

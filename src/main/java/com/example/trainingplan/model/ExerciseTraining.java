@@ -17,6 +17,7 @@ public class ExerciseTraining {
     // dlugosc przerwy miedzy seriami (s)
     private int rest;
     // nazwa dnia treningwego
+    @Column(length = 4)
     private String trainingDayNumber;
 
     @ManyToOne

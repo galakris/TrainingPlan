@@ -13,13 +13,15 @@ public class Exercise {
     private String name;
 
     // chest, back, biceps,
-    //@Column( nullable=false, length = 32)
+    @Column( nullable=false, length = 64)
     private String muscle;
 
     // polish descryption
+    @Column( length = 255)
     private String descryption;
 
     // how to do
+    @Column(length = 255)
     private String instruction;
 
     // street workout available

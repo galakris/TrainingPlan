@@ -9,7 +9,7 @@ public class ExerciseSchema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // A/B
-    @Column(length = 2)
+    @Column(length = 4)
     private String trainingNumber;
 
     private int exerciseNumber;

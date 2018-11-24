@@ -1,11 +1,13 @@
 package com.example.trainingplan.workout;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 public class Wrapper {
     ArrayList<ChooseExercises> chooseExercises;
 
+    @Size(max = 32)
     @NotEmpty
     String name;
 

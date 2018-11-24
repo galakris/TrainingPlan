@@ -3,6 +3,7 @@ package com.example.trainingplan.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -12,17 +13,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
-    @Column(unique = true)
+    @Size(max = 32)
+    @Column(unique = true, length = 32)
     private String login;
     @NotEmpty
+    @Size(min = 4)
+    @Column(nullable = false, length = 128)
     private String password;    // chyba zamiast string char powinien byc
     @NotEmpty
+    @Size(max = 32)
+    @Column(nullable = false, length = 32)
     private String firstName;
     @NotEmpty
+    @Column(nullable = false, length = 32)
     private String lastName;
     @NotEmpty
     @Email
-    @Column(unique = true)
+    @Column(unique = true, length = 64)
     private String email;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<TrainingPlan> trainingPlans;
