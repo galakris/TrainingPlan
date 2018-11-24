@@ -10,10 +10,12 @@ public class TrainingSchema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 16)
     private String type;
     // dlugosc w minutach
     private int length;
     // cel mass/strength/fit
+    @Column(nullable = false, length = 16)
     private String goal;
 
     @OneToMany(mappedBy = "trainingSchema",fetch = FetchType.EAGER)
@@ -68,5 +70,13 @@ public class TrainingSchema {
         this.exerciseSchemas = exerciseSchemas;
     }
 
-
+    @Override
+    public String toString() {
+        return "TrainingSchema{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", length=" + length +
+                ", goal='" + goal + '\'' +
+                '}';
+    }
 }

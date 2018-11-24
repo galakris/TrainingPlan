@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <title>Ćwiczenia</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,9 +41,33 @@
     </div>
 </nav>
 
-<div class="container card bg-light px-0" style="min-height: 500px">
 
-    <h3 class="card-header bg-info text-center text-light">Witaj <span th:text="${name}"/>!!!</h3>
+<div class="container card bg-light px-0 mb-2">
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr class="card-header bg-info">
+                <th class="text-light">Trening</th>
+                <th class="text-light">Numer</th>
+                <th class="text-light">Ćwiczenie</th>
+                <th class="text-light">Serie</th>
+                <th class="text-light">Powtórzenia</th>
+                <th class="text-light">Przerwa</th>
+                <th></th>
+            </tr>
+            <tr th:each="exerciseTraining: ${exerciseTrainings}" th:object="${exerciseTraining}">
+                <td th:text="*{trainingDayNumber}"></td>
+                <td th:text="*{number}"></td>
+                <td th:text="*{exercise.name}"></td>
+                <td th:text="*{sets}"></td>
+                <td th:text="*{reps}"></td>
+                <td th:text="*{rest}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${exerciseTrainings.isEmpty()}">
+        <h2 class="text-center" style="color: red">BRAK PLANÓW TRENINGOWYCH</h2>
+    </div>
 </div>
 
 <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>

@@ -9,7 +9,7 @@ public class ExerciseSchema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // A/B
-    @Column(length = 2)
+    @Column(length = 4)
     private String trainingNumber;
 
     private int exerciseNumber;
@@ -104,5 +104,17 @@ public class ExerciseSchema {
 
     public void setExerciseType(ExerciseType exerciseType) {
         this.exerciseType = exerciseType;
+    }
+
+    @Override
+    public String toString() {
+        return "ExerciseSchema{" +
+                "id=" + id +
+                ", trainingNumber=" + trainingNumber +
+                ", exerciseNumber=" + exerciseNumber +
+                ", sets=" + sets +
+                ", reps=" + reps +
+                ", rest=" + rest +
+                '}';
     }
 }

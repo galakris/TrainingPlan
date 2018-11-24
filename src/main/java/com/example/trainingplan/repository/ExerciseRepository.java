@@ -5,6 +5,8 @@ import com.example.trainingplan.model.ExerciseType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
@@ -12,5 +14,7 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     Exercise findFirstByName(String name);
 
     Exercise findFirstByExerciseType(ExerciseType exerciseType);
+
+    List<Exercise> findAllByExerciseType(ExerciseType exerciseType);
 
 }

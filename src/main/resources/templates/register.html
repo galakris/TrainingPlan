@@ -9,41 +9,53 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" >
 
 </head>
-<body>
-    <div class="container">
-        <br /><br />
+<body style="background-color: #888888">
 
-            <form action="#" method="post" th:action="@{/register}" th:object="${user}" class="form-horizontal offset-sm-3 col-sm-6" >
+<div class="card offset-sm-4 col-sm-4 px-0 mt-5">
 
-                <h2 class="">Rejestracja</h2>
+    <h5 class="card-header bg-info text-white text-center py-4 mb-5">
+        <strong>REJESTRACJA</strong>
+    </h5>
 
-                <div class="form-group">
-                    <input th:field="*{firstName}" placeholder="Imię" class="form-control"/>
-                    <p th:errors="*{firstName}" class="text-danger"></p>
-                </div>
-                <div class="form-group">
-                    <input th:field="*{lastName}" placeholder="Nazwisko" class="form-control"/>
-                    <p th:errors="*{lastName}" class="text-danger"></p>
-                </div>
-                <div class="form-group">
-                    <input th:field="*{email}" placeholder="Email" class="form-control"/>
-                    <p th:errors="*{email}" class="text-danger" ></p>
-                </div>
-                <div class="form-group">
-                    <input th:field="*{login}"  placeholder="Nazwa użytkownika" class="form-control"/>
-                    <p th:errors="*{login}" class="text-danger"></p>
-                </div>
-                <div class="form-group">
-                    <input th:field="*{password}" type="password" placeholder="Hasło" class="form-control"/>
-                    <p th:errors="*{password}" class="text-danger"></p>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Register" class="btn btn-primary btn-block"/>
-                </div>
+    <div class="card-body pt-0">
 
-            </form>
+        <form action="#" method="post" th:action="@{/register}" th:object="${user}" class="text-center" style="color: #757575;">
 
+            <div style="margin-bottom: 25px" class="form-group">
+                <input th:field="*{firstName}" placeholder="Imię" class="form-control"/>
+                <p th:errors="*{firstName}" class="text-danger"></p>
+            </div>
+            <div style="margin-bottom: 25px" class="form-group">
+                <input th:field="*{lastName}" placeholder="Nazwisko" class="form-control"/>
+                <p th:errors="*{lastName}" class="text-danger"></p>
+            </div>
+            <div style="margin-bottom: 25px" class="form-group">
+                <input th:field="*{email}" placeholder="Email" class="form-control"/>
+                <p th:errors="*{email}" class="text-danger" ></p>
+            </div>
+            <div style="margin-bottom: 25px" class="form-group">
+                <input th:field="*{login}"  placeholder="Nazwa użytkownika" class="form-control"/>
+                <p th:errors="*{login}" class="text-danger"></p>
+            </div>
+            <div style="margin-bottom: 25px" class="form-group">
+                <input th:field="*{password}" type="password" placeholder="Hasło" class="form-control"/>
+                <p th:errors="*{password}" class="text-danger"></p>
+            </div>
+
+            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Zarejestruj</button>
+
+            <div class="form-group">
+                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                    Masz już konto?
+                    <a href="#" th:href="@{/login}" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                        Zaloguj się
+                    </a>
+                </div>
+            </div>
+
+        </form>
     </div>
+</div>
 
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>

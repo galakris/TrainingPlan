@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;/*
-    private BCryptPasswordEncoder bCryptPasswordEncoder;*/
+    private UserRepository userRepository;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -19,12 +18,11 @@ public class UserService {
     }
 
 
-    public void add(User user){/*
-        System.out.println("Przed: " + user.getPassword() );
-        String passwordHash = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(passwordHash);
-        System.out.println("Po: " + user.getPassword() );*/
+    public void add(User user){
         userRepository.save(user);
     }
 
+    public User findUserByLogin(String name) {
+        return userRepository.findByLogin(name);
+    }
 }
